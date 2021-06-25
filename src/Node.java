@@ -24,3 +24,6 @@ public class Node {
         this.y = y;
     }
 }
+
+
+//Use this? https://docs.oracle.com/javase/8/javafx/api/javafx/scene/Node.html

@@ -24,6 +24,7 @@ public class Board extends JPanel {
 
 
 
+
     public Board() {
         Dimension dimension = new Dimension();
         dimension.width = 600;
@@ -147,6 +148,7 @@ public class Board extends JPanel {
                 break;
         } else {
             System.out.println("No movement");
+            //Game over
         }
 
 
@@ -204,6 +206,7 @@ public class Board extends JPanel {
     public boolean collides(){
         if (getMoveX() <= 0 || getMoveX() > 600) {
             System.out.println("Wall");
+
             return true;
 
         } else if (getMoveY() < 1 || getMoveY() > 500) {
