@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class GameOver extends JFrame {
@@ -32,5 +34,21 @@ public class GameOver extends JFrame {
             setSize(300, 150);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setLocationRelativeTo(null);
+
+            close.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                            System.exit(0);
+                    }
+            });
+
+            ok.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                            System.exit(0); // Change This!
+                    }
+            });
+
+
     }
 }

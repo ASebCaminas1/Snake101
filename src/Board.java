@@ -146,7 +146,7 @@ public class Board extends JPanel {
                 moveDown();
                 break;
         } else {
-            System.out.println("Toca");
+            System.out.println("No movement");
         }
 
 
@@ -179,8 +179,6 @@ public class Board extends JPanel {
         myKey = new MyKeyAdapter();
         addKeyListener(myKey);
 
-
-
         timer = new Timer(deltaTime, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -205,18 +203,18 @@ public class Board extends JPanel {
 
     public boolean collides(){
         if (getMoveX() <= 0 || getMoveX() > 600) {
-            System.out.println("Toca pared");
+            System.out.println("Wall");
             return true;
 
         } else if (getMoveY() < 1 || getMoveY() > 500) {
-            System.out.println("Toca suelo");
+            System.out.println("Ground");
             return true;
         }
         return false;
     }
 
 
-
+    //For food
     public int randomizer(int num) {
         int random;
         random = (int) (Math.random() * num);
