@@ -28,24 +28,38 @@ public class Board extends JPanel {
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
-                    snake.setDirection(Direction.LEFT);
-                    System.out.println("Left");
+                    if (snake.getDirection() != Direction.RIGHT) {
+                        snake.setDirection(Direction.LEFT);
+                    }
                     break;
                 case KeyEvent.VK_RIGHT:
-                    snake.setDirection(Direction.RIGHT);
+                    if (snake.getDirection() != Direction.LEFT) {
+                        snake.setDirection(Direction.RIGHT);
+                    }
                     break;
                 case KeyEvent.VK_UP:
-                    snake.setDirection(Direction.UP);
+                    if (snake.getDirection() != Direction.DOWN) {
+                        snake.setDirection(Direction.UP);
+                    }
                     break;
                 case KeyEvent.VK_DOWN:
-                    snake.setDirection(Direction.DOWN);
+                    if (snake.getDirection() != Direction.UP) {
+                        snake.setDirection(Direction.DOWN);
+                    }
                     break;
                 case KeyEvent.VK_SPACE:
-
+                    Node node = new Node(snake.calculateNextNode().getRow(), snake.calculateNextNode().getCol()) ;
+                    for (int i = 0; i < 2; i++) {
+                    snake.getBody().add(0, node);
+                    snake.removeLastNode();
+                    }
                     break;
                 case KeyEvent.VK_P:
-
-
+                    if (timer.isRunning()) {
+                        timer.stop();
+                    } else {
+                        timer.start();
+                    }
                     break;
                 default:
                     break;
