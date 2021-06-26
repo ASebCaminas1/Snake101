@@ -2,8 +2,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-
-public class GameOver extends JFrame {
+//opcional crear menús y ventanas
+public class GameOver extends JPanel {
 
     public GameOver() {
             JPanel basic = new JPanel();
@@ -30,10 +30,10 @@ public class GameOver extends JFrame {
             bottom.add(Box.createRigidArea(new Dimension(15, 0)));
             basic.add(bottom);
             basic.add(Box.createRigidArea(new Dimension(0, 15)));
-            setTitle("Game over");
+            //setTitle("Game over");
             setSize(300, 150);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setLocationRelativeTo(null);
+            //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //setLocationRelativeTo(null);
 
             close.addActionListener(new ActionListener() {
                     @Override

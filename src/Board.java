@@ -7,34 +7,18 @@ import java.awt.event.KeyEvent;
 
 public class Board extends JPanel {
 
-    private static final int LEFT = 1;
-    private int right = 2;
-    private int up = 3;
-    private int down = 4;
-    private int direction = 0;
-    private Graphics square;
-    private int moveX;
-    private int moveY;
-    private boolean gameOver;
-    private boolean pause = false;
-    private MyKeyAdapter myKey;
+    public static final int NUM_ROWS = 40;
+    public static final int NUM_COLS = 80;
     private int deltaTime = 300;
+    private Snake snake;
     private Timer timer;
-    private int board[][] = new int[400][300]; // para comprobar colisiones o comidas?
+    private MyKeyAdapter myKey;
+    private Incrementer incrementer;
 
 
+    public Board(Incrementer incrementer) {
+        this.incrementer = incrementer;
 
-
-    public Board() {
-        Dimension dimension = new Dimension();
-        dimension.width = 600;
-        dimension.height = 400;
-        setPreferredSize(dimension);
-        moveX = 20;
-        moveY = 40;
-        setBackground(Color.gray);
-        setDirection(LEFT);
-        this.setFocusable(true);
     }
 
 
@@ -44,42 +28,24 @@ public class Board extends JPanel {
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
-                    if (!pause) {
-                        moveLeft();
-                        setDirection(LEFT);
-                    }
+                    snake.setDirection(Direction.LEFT);
+                    System.out.println("Left");
                     break;
                 case KeyEvent.VK_RIGHT:
-                    if (!pause) {
-                        moveRight();
-                        setDirection(right);
-                    }
+                    snake.setDirection(Direction.RIGHT);
                     break;
                 case KeyEvent.VK_UP:
-                    if (!pause) {
-                        moveUP();
-                        setDirection(up);
-                    }
-                    break;
-                case KeyEvent.VK_SPACE:
-                    if (!pause) {
-                        System.out.println("SPACE");
-                    }
+                    snake.setDirection(Direction.UP);
                     break;
                 case KeyEvent.VK_DOWN:
-                    if (!pause) {
-                        moveDown();
-                        setDirection(down);
-                    }
+                    snake.setDirection(Direction.DOWN);
+                    break;
+                case KeyEvent.VK_SPACE:
+
                     break;
                 case KeyEvent.VK_P:
-                    if (!pause) {
-                        timer.stop();
-                        pause = true;
-                    } else {
-                        timer.start();
-                        pause = false;
-                    }
+
+
                     break;
                 default:
                     break;
@@ -89,103 +55,19 @@ public class Board extends JPanel {
 
     }
 
+    public void initGame() {
 
-    public void setMoveX(int moveX) {
-        this.moveX = moveX;
-    }
-
-    public void setMoveY(int moveY) {
-        this.moveY = moveY;
-    }
-
-    public int getMoveX() {
-        return moveX;
-    }
-
-    public int getMoveY() {
-        return moveY;
-    }
-
-
-    public void moveRight() {
-        int x = getMoveX();
-        x = x + 20;
-        setMoveX(x);
-    }
-
-    public void moveLeft() {
-        int x = getMoveX();
-        x = x - 20;
-        setMoveX(x);
-    }
-
-    public void moveUP() {
-        int y = getMoveY();
-        y = y - 20;
-        setMoveY(y);
-    }
-
-    public void moveDown() {
-        int y = getMoveY();
-        y = y + 20;
-        setMoveY(y);
-    }
-
-    public void motor() {
-        if (!collides())
-        switch (getDirection()) {
-            case 1:
-                moveLeft();
-                break;
-            case 2:
-                moveRight();
-                break;
-            case 3:
-                moveUP();
-                break;
-            case 4:
-                moveDown();
-                break;
-        } else {
-            System.out.println("No movement");
-            //Game over
-        }
-
-
-
-    }
-
-    public void setDirection(int dir) {
-        this.direction = dir;
-    }
-
-    public int getDirection() {
-        return direction;
-    }
-
-
-
-
-
-
-    // tabla de puntos
-
-
-
-
-    public boolean inGame() {
-        return false;
-    }
-
-    public void initGame () {
         myKey = new MyKeyAdapter();
+        snake = new Snake();
         addKeyListener(myKey);
-
+        setFocusable(true);
+        requestFocus();
+        incrementer.reset();
         timer = new Timer(deltaTime, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                snake.move();
 
-                motor();
                 repaint();
             }
         });
@@ -193,42 +75,28 @@ public class Board extends JPanel {
 
     }
 
-    public void paintComponent(Graphics g) {
+    @Override
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.fillRect(moveX, moveY, 20, 20);
+        snake.paint(g, getSize().width / Board.NUM_COLS,
+                getSize().height / Board.NUM_ROWS);
+
+        drawBlackBorder(g);
+/*
+        if (snake != null) {
+            snake.paint(g, getSize().width / Board.NUM_COLS,
+                    getSize().height / Board.NUM_ROWS);
+            food.paint(g, getSize().width / Board.NUM_COLS,
+                    getSize().height / Board.NUM_ROWS);
+            if (gameOver)
+                printGameOver(g);
+        }*/
+        Toolkit.getDefaultToolkit().sync(); // To avoid jumps when no pressed key
     }
 
-
-    //public int randomFood(){
-
-    //}
-
-    public boolean collides(){
-        if (getMoveX() <= 0 || getMoveX() > 600) {
-            System.out.println("Wall");
-
-            return true;
-
-        } else if (getMoveY() < 1 || getMoveY() > 500) {
-            System.out.println("Ground");
-            return true;
-        }
-        return false;
+    private void drawBlackBorder(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.drawRect(0, 0, getWidth() / NUM_COLS * NUM_COLS,
+                getHeight() / NUM_ROWS * NUM_ROWS);
     }
-
-
-    //For food
-    public int randomizer(int num) {
-        int random;
-        random = (int) (Math.random() * num);
-        return random;
-    }
-
-
-
-
-
-
-
-
 }
