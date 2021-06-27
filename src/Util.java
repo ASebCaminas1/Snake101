@@ -21,6 +21,4 @@ public class Util {
                 y + squareHeight - 1,
                 x + squareWidth - 1, y + 1);
     }
-
-
 }
