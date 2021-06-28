@@ -99,24 +99,29 @@ public class Board extends JPanel {
 
     public void lap() {
         if (!snake.colides()) {
-        snake.move();
+            snake.move();
+            System.out.println(food.getFoodType());
         if (snake.checkFood(food)) {
             if (food.getFoodType().equals("Coffee")) {
                 setDeltaTime(100);
+                foodRemover();
             }
             if (food.getFoodType().equals("Eggplant")) {
                 snake.incrementNodesToGrow(1);
-            } else {
-                snake.incrementNodesToGrow(3);
+                foodRemover();
             }
-            foodCreator();
+            if (food.getFoodType().equals("Advocado")){
+                snake.incrementNodesToGrow(3);
+                foodRemover();
+            }
+            food = foodCreator();
             System.out.println("Jala");
         }
+            antiTurner = false;
+            repaint();
         } else {
             gameOver();
         }
-        antiTurner = false;
-        repaint();
     }
 
     @Override
@@ -127,16 +132,6 @@ public class Board extends JPanel {
         food.paint(g, getSize().width / Board.NUM_COLS,getSize().height / Board.NUM_ROWS);
 
         drawBlackBorder(g);
-
-/*
-        if (snake != null) {
-            snake.paint(g, getSize().width / Board.NUM_COLS,
-                    getSize().height / Board.NUM_ROWS);
-            food.paint(g, getSize().width / Board.NUM_COLS,
-                    getSize().height / Board.NUM_ROWS);
-            if (gameOver)
-                printGameOver(g);
-        }*/
         Toolkit.getDefaultToolkit().sync(); // To avoid jumps when no pressed key
     }
 

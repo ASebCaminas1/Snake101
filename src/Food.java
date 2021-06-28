@@ -6,19 +6,21 @@ public class Food {
 
     private int row;
     private int col;
-    private String foodType = "Eggplant";
+    private String foodType;
     public static final Color brown = new Color(102,51,0);
 
     public Food(Snake snake) {
 
-        Random rnd = new Random();
-        int num =  (int)(rnd.nextDouble() * 2 + 0);
+        int num =  (int) (Math.random() * 4);
         switch (num) {
             case 1:
                 foodType = "Coffee";
                 break;
             case 2:
                 foodType = "Advocado";
+                break;
+            default:
+                foodType = "Eggplant";
                 break;
         }
 
@@ -35,7 +37,6 @@ public class Food {
         }
     }
 
-
     public String getFoodType() {
         return foodType;
     }
@@ -44,7 +45,7 @@ public class Food {
         if (getFoodType().equals("Eggplant")) {
         Util.drawSquare(g, row, col, Color.WHITE, width, height);
         }
-        if (getFoodType().equals("Cofee")) {
+        if (getFoodType().equals("Coffee")) {
             Util.drawSquare(g, row, col, brown, width, height);
         }
         if (getFoodType().equals("Advocado")) {
