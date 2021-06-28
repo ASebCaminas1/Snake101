@@ -8,44 +8,44 @@ public class Game extends JFrame {
     private ScoreBoard scoreBoard;
 
 
-     public Game() {
-         super();
-         setTitle("Snake Game");
-         setIconImage(new ImageIcon("res/icon.png").getImage());
-         setDefaultCloseOperation(EXIT_ON_CLOSE);
-         scoreBoard = new ScoreBoard();
-         board = new Board(scoreBoard);
-         board.setBackground(Color.black);
-         scoreBoard.setBackground(Color.GRAY);
+    public Game() {
+        super();
+        setTitle("Snake Game");
+        setIconImage(new ImageIcon("res/icon.png").getImage());
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        scoreBoard = new ScoreBoard();
+        board = new Board(scoreBoard);
+        board.setBackground(Color.black);
+        scoreBoard.setBackground(Color.GRAY);
 
-         Dimension dimension = new Dimension();
-         dimension.width = 800;
-         dimension.height = 640;
-         setResizable(false);
-
-
-         mainPanel = new JPanel();
-
-         mainPanel.setPreferredSize(dimension);
-
-         mainPanel.setLayout(new BorderLayout());
-
-         mainPanel.add(board, BorderLayout.CENTER);
-         mainPanel.add(scoreBoard, BorderLayout.PAGE_END);
-         setContentPane(mainPanel);
+        Dimension dimension = new Dimension();
+        dimension.width = 800;
+        dimension.height = 640;
+        setResizable(false);
 
 
-         board.initGame();
+        mainPanel = new JPanel();
 
-         pack();
-         setLocationRelativeTo(null);
-     }
+        mainPanel.setPreferredSize(dimension);
 
+        mainPanel.setLayout(new BorderLayout());
+
+        mainPanel.add(board, BorderLayout.CENTER);
+        mainPanel.add(scoreBoard, BorderLayout.PAGE_END);
+        setContentPane(mainPanel);
+        createMenu();
+
+
+        board.initGame();
+
+        pack();
+        setLocationRelativeTo(null);
+    }
 
 
     public static void main(String[] args) {
 
-        javax.swing.SwingUtilities.invokeLater(new Runnable(){
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
 
             @Override
             public void run() {
@@ -53,5 +53,9 @@ public class Game extends JFrame {
                 frame.setVisible(true);
             }
         });
+    }
+
+    private void createMenu() {
+
     }
 }

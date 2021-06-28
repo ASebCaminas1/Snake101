@@ -14,11 +14,13 @@ public class Board extends JPanel {
     private int deltaTime = 600;
     private Snake snake;
     private Food food;
+    private SpecialFood specialFood;
     private int caffeine = 0;
     private Timer timer;
     private MyKeyAdapter myKey;
     private Incrementer incrementer;
     private boolean antiTurner = false;
+    private Coffee coffee;
     //private BufferedImage background;
 
     public Board(Incrementer incrementer) {
@@ -100,23 +102,21 @@ public class Board extends JPanel {
     public void lap() {
         if (!snake.colides()) {
             snake.move();
-            System.out.println(food.getFoodType());
-        if (snake.checkFood(food)) {
-            if (food.getFoodType().equals("Coffee")) {
-                setDeltaTime(100);
-                foodRemover();
+            if (snake.checkFood(food)) {
+                if (food instanceof SpecialFood) {
+                        snake.incrementNodesToGrow(3);
+                        incrementer.incrementScore(100);
+                } else {
+                    snake.incrementNodesToGrow(1);
+                    incrementer.incrementScore(10);
+                    System.out.println(food.getType());
+                }
+                if (food.getType().equals("COFFEE")) {
+                    setDeltaTime(100);
+                    System.out.println(food.getType());
+                }
+                food = foodCreator();
             }
-            if (food.getFoodType().equals("Eggplant")) {
-                snake.incrementNodesToGrow(1);
-                foodRemover();
-            }
-            if (food.getFoodType().equals("Advocado")){
-                snake.incrementNodesToGrow(3);
-                foodRemover();
-            }
-            food = foodCreator();
-            System.out.println("Jala");
-        }
             antiTurner = false;
             repaint();
         } else {
@@ -124,18 +124,24 @@ public class Board extends JPanel {
         }
     }
 
+
+    public void foodManage() {
+        food = foodCreator();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         snake.paint(g, getSize().width / Board.NUM_COLS,
                 getSize().height / Board.NUM_ROWS);
-        food.paint(g, getSize().width / Board.NUM_COLS,getSize().height / Board.NUM_ROWS);
+        food.paint(g, getSize().width / Board.NUM_COLS, getSize().height / Board.NUM_ROWS);
 
         drawBlackBorder(g);
-        Toolkit.getDefaultToolkit().sync(); // To avoid jumps when no pressed key
+        Toolkit.getDefaultToolkit().sync();
     }
 
-    public void setDeltaTime(int x){
+    public void setDeltaTime(int x) {
+        //Caffeine controls that the coffee type modifies the delta time up to a maximum of three times.
         if (caffeine < 3) {
             deltaTime = getDeltaTime() - x;
         } else {
@@ -144,7 +150,7 @@ public class Board extends JPanel {
         }
     }
 
-    public int getDeltaTime(){
+    public int getDeltaTime() {
         return deltaTime;
     }
 
@@ -155,6 +161,7 @@ public class Board extends JPanel {
     }
 
     public void jump() {
+        //Pressing space moves the snake forward two nodes.
         Node node = new Node(snake.calculateNextNode().getRow(), snake.calculateNextNode().getCol());
         for (int i = 0; i <= 2; i++) {
             snake.getBody().add(0, node);
@@ -163,13 +170,23 @@ public class Board extends JPanel {
     }
 
     public Food foodCreator() {
+        //Select randomly between normal and special food.
+        int num = (int) (Math.random() * 4);
+        if (num == 2) {
+            return new SpecialFood(snake, this::foodRemove);
+        }
+        if (num == 3) {
+            return new Coffee(snake,this::foodRemove);
+        }
         return new Food(snake);
+
+
     }
 
-    public void foodRemover(){
-        food.setRow(200);
-        food.setCol(200);
+    public void foodRemove() {
+        foodCreator();
     }
+
 
     private void gameOver(){
         System.out.println("GAME OVER");
