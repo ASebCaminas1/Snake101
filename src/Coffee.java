@@ -1,13 +1,15 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
 
-public class Coffee {
+public class Coffee extends Food {
 
     private int row;
     private int col;
     public static final Color brown = new Color(102,51,0);
 
     public Coffee(Snake snake){
+        super(snake);
 
         boolean onTheSnake = true;
         while (onTheSnake){
@@ -20,8 +22,7 @@ public class Coffee {
         }
     }
     public void paint(Graphics g, int width, int height) {
-        Util.drawSquare(g, getRow(), getCol(), brown, width, height);
-        System.out.println("café");
+        Util.drawSquare(g, row, col, brown, width, height);
     }
 
     public int getRow() {
@@ -40,5 +41,6 @@ public class Coffee {
         this.col = col;
     }
 }
+
 
 

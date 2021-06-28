@@ -150,26 +150,46 @@ public class Snake {
         return false;
     }
 
-    public boolean checkEat(Food food){
+    //Food checkers
+
+    public boolean checkFood(Food food){
         //Check if the first node of the snake matches the node of the food.
         Node first = body.get(0);
-        if (food.getRow() == first.getRow() && food.getCol() == first.getCol()){
+        if (food.getRow() == first.getRow() && food.getCol() == first.getCol()) {
             return true;
         } else {
             return false;
         }
     }
 
-    public void teleportSnake(Node nextNode) {
+    public boolean checkAdvocado(Advocado advocado){
         Node first = body.get(0);
-        int row = first.getRow();
-        int col = first.getCol();
-
-        if (nextNode.getRow() < 0) {
-            
-
-
+        if (advocado.getRow() == first.getRow() && advocado.getCol() == first.getCol()) {
+            return true;
+        } else {
+            return false;
         }
+    }
+    public boolean checkCoffee(Coffee coffee){
+        Node first = body.get(0);
+        if (coffee.getRow() == first.getRow() && coffee.getCol() == first.getCol()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public void teleportSnake(Node nextNode) {
+        body = new ArrayList<Node>();
+        if (nextNode.getCol() < 0) {
+        for (int i = 0; i < body.size(); i++) {
+                removeLastNode();
+                body.add(new Node(Board.NUM_ROWS/2,49));
+                setDirection(getDirection());
+            }
+        }
+    }
 
 
 
@@ -183,7 +203,7 @@ public class Snake {
 
 
 
-    }
+
 
 
 

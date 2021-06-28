@@ -15,13 +15,13 @@ public class Game extends JFrame {
          setDefaultCloseOperation(EXIT_ON_CLOSE);
          scoreBoard = new ScoreBoard();
          board = new Board(scoreBoard);
-         //board.setBackground(Color.black);
+         board.setBackground(Color.black);
          scoreBoard.setBackground(Color.GRAY);
 
          Dimension dimension = new Dimension();
          dimension.width = 800;
          dimension.height = 640;
-         //setResizable(false);
+         setResizable(false);
 
 
          mainPanel = new JPanel();

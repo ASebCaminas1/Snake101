@@ -8,8 +8,15 @@ public class Advocado extends Food {
 
     public Advocado(Snake snake){
         super(snake);
-        int row = (int) (Math.random() * Board.NUM_ROWS);
-        int col = (int) (Math.random() * Board.NUM_COLS);
+        boolean onTheSnake = true;
+        while (onTheSnake){
+            row = (int) (Math.random() * Board.NUM_ROWS);
+            col = (int) (Math.random() * Board.NUM_COLS);
+            onTheSnake = false;
+            if (snake.checkBody(new Node(row,col))) {
+                onTheSnake = true;
+            }
+        }
     }
 
     public void paint(Graphics g, int width, int height) {
