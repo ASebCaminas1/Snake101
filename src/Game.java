@@ -57,5 +57,43 @@ public class Game extends JFrame {
 
     private void createMenu() {
 
+        JMenuBar menubar = new JMenuBar();
+        JMenu startm = new JMenu("Start");
+        JMenu exitm = new JMenu("Exit");
+        JMenu pausem = new JMenu("Pause");
+        JMenu helpm = new JMenu("Help");
+
+        menubar.add(startm);
+        startm.addActionListener(new java.awt.event.ActionListener() {
+                                     public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                         board.timer.stop();
+                                         board.initGame();
+                                     }
+                                 });
+        menubar.add(exitm);
+        exitm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                System.exit(0);
+            }
+        });
+        menubar.add(pausem);
+        pausem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (board.timer.isRunning()) {
+                board.timer.stop();
+                } else {
+                    board.timer.start();
+                }
+            }
+        });
+
+
+        menubar.add(Box.createHorizontalGlue());
+
+
+        menubar.add(helpm);
+
+
+        setJMenuBar(menubar);
     }
 }

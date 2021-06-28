@@ -16,7 +16,7 @@ public class Board extends JPanel {
     private Food food;
     private SpecialFood specialFood;
     private int caffeine = 0;
-    private Timer timer;
+    public Timer timer;
     private MyKeyAdapter myKey;
     private Incrementer incrementer;
     private boolean antiTurner = false;
@@ -184,6 +184,9 @@ public class Board extends JPanel {
     }
 
     public void foodRemove() {
+        if (!(food instanceof SpecialFood)) {
+            return;
+        }
         foodCreator();
     }
 
