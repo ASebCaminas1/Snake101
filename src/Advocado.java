@@ -6,17 +6,18 @@ public class Advocado extends Food {
     private int col;
 
 
-    public Advocado(Snake snake){
+    public Advocado(Snake snake) {
         super(snake);
         boolean onTheSnake = true;
-        while (onTheSnake){
+        while (onTheSnake) {
             row = (int) (Math.random() * Board.NUM_ROWS);
             col = (int) (Math.random() * Board.NUM_COLS);
             onTheSnake = false;
-            if (snake.checkBody(new Node(row,col))) {
+            if (snake.checkBody(new Node(row, col))) {
                 onTheSnake = true;
             }
         }
+
     }
 
     public void paint(Graphics g, int width, int height) {
@@ -27,15 +28,7 @@ public class Advocado extends Food {
         return row;
     }
 
-    public void setRow(int row) {
-        this.row = row;
-    }
-
     public int getCol() {
         return col;
-    }
-
-    public void setCol(int col) {
-        this.col = col;
     }
 }

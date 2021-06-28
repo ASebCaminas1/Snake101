@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
 
@@ -29,16 +28,8 @@ public class Coffee extends Food {
         return row;
     }
 
-    public void setRow(int row) {
-        this.row = row;
-    }
-
     public int getCol() {
         return col;
-    }
-
-    public void setCol(int col) {
-        this.col = col;
     }
 }
 

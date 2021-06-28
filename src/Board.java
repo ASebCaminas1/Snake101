@@ -14,16 +14,12 @@ public class Board extends JPanel {
     private int deltaTime = 600;
     private Snake snake;
     private Food food;
-    private Advocado advocado;
-    private Coffee coffee;
-    private int cafeine = 0;
+    private int caffeine = 0;
     private Timer timer;
     private MyKeyAdapter myKey;
     private Incrementer incrementer;
     private boolean antiTurner = false;
-    private BufferedImage background;
-
-
+    //private BufferedImage background;
 
     public Board(Incrementer incrementer) {
         this.incrementer = incrementer;
@@ -86,8 +82,6 @@ public class Board extends JPanel {
         myKey = new MyKeyAdapter();
         snake = new Snake();
         food = new Food(snake);
-        coffee = new Coffee(snake);
-        advocado = new Advocado(snake);
 
         addKeyListener(myKey);
         setFocusable(true);
@@ -107,24 +101,20 @@ public class Board extends JPanel {
         if (!snake.colides()) {
         snake.move();
         if (snake.checkFood(food)) {
-            snake.incrementNodesToGrow(1);
-            foodSelector();
-        }
-        if (snake.checkAdvocado(advocado))
-        {
-            snake.incrementNodesToGrow(3);
-            foodSelector();
-        }
-        if (snake.checkCoffee(coffee)){
-            cafeine++;
-            setDeltaTime(100);
-            foodSelector();
+            if (food.getFoodType().equals("Coffee")) {
+                setDeltaTime(100);
+            }
+            if (food.getFoodType().equals("Eggplant")) {
+                snake.incrementNodesToGrow(1);
+            } else {
+                snake.incrementNodesToGrow(3);
+            }
+            foodCreator();
+            System.out.println("Jala");
         }
         } else {
-
+            gameOver();
         }
-
-
         antiTurner = false;
         repaint();
     }
@@ -134,15 +124,8 @@ public class Board extends JPanel {
         super.paintComponent(g);
         snake.paint(g, getSize().width / Board.NUM_COLS,
                 getSize().height / Board.NUM_ROWS);
-        if (coffee != null ) {
-            coffee.paint(g, getSize().width / Board.NUM_COLS,getSize().height / Board.NUM_ROWS);
-        }
-        if (food != null) {
         food.paint(g, getSize().width / Board.NUM_COLS,getSize().height / Board.NUM_ROWS);
-        }
-        if (advocado != null) {
-            advocado.paint(g, getSize().width / Board.NUM_COLS,getSize().height / Board.NUM_ROWS);
-        }
+
         drawBlackBorder(g);
 
 /*
@@ -158,11 +141,11 @@ public class Board extends JPanel {
     }
 
     public void setDeltaTime(int x){
-        if (cafeine < 3) {
+        if (caffeine < 3) {
             deltaTime = getDeltaTime() - x;
         } else {
             deltaTime = 600;
-            cafeine = 0;
+            caffeine = 0;
         }
     }
 
@@ -184,36 +167,13 @@ public class Board extends JPanel {
         }
     }
 
-    public void foodSelector(){
-        Random rnd = new Random();
-        int num =  (int)(rnd.nextDouble() * 5 + 0);
-        switch (num) {
-            case 1:
-                coffee = new Coffee(snake);
-                System.out.println("Coffee");
+    public Food foodCreator() {
+        return new Food(snake);
+    }
 
-                break;
-            case 2:
-                food = new Food(snake);
-                System.out.println("Food");
-
-                break;
-            case 3:
-                advocado = new Advocado(snake);
-                System.out.println("Advocado");
-
-                break;
-            case 4:
-                food = new Food(snake);
-                coffee = new Coffee(snake);
-
-                System.out.println("bonus");
-
-                break;
-            default:
-                break;
-
-        }
+    public void foodRemover(){
+        food.setRow(200);
+        food.setCol(200);
     }
 
     private void gameOver(){

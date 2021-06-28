@@ -162,23 +162,6 @@ public class Snake {
         }
     }
 
-    public boolean checkAdvocado(Advocado advocado){
-        Node first = body.get(0);
-        if (advocado.getRow() == first.getRow() && advocado.getCol() == first.getCol()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    public boolean checkCoffee(Coffee coffee){
-        Node first = body.get(0);
-        if (coffee.getRow() == first.getRow() && coffee.getCol() == first.getCol()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 
     public void teleportSnake(Node nextNode) {
         body = new ArrayList<Node>();
