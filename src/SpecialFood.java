@@ -20,10 +20,10 @@ public class SpecialFood extends Food {
             public void run() {
                 try {
                     Thread.sleep(visible);
-                    //rot = false;
+                     rot = false;
                     System.out.println("The banana has rotten");
-                   // visible = timeRot;
-                   // Thread.sleep(visible);
+
+                    Thread.sleep(timeRot);
                     foodRemover.foodRemove();
 
                 } catch (InterruptedException e) {

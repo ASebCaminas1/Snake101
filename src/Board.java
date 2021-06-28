@@ -7,20 +7,20 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class Board extends JPanel {
+public class Board extends JPanel implements FoodRemover {
 
     public static final int NUM_ROWS = 40;
     public static final int NUM_COLS = 50;
     private int deltaTime = 600;
     private Snake snake;
     private Food food;
-    private SpecialFood specialFood;
+
     private int caffeine = 0;
     public Timer timer;
     private MyKeyAdapter myKey;
     private Incrementer incrementer;
     private boolean antiTurner = false;
-    private Coffee coffee;
+
     //private BufferedImage background;
 
     public Board(Incrementer incrementer) {
@@ -173,10 +173,10 @@ public class Board extends JPanel {
         //Select randomly between normal and special food.
         int num = (int) (Math.random() * 4);
         if (num == 2) {
-            return new SpecialFood(snake, this::foodRemove);
+            return new SpecialFood(snake, this);
         }
         if (num == 3) {
-            return new Coffee(snake,this::foodRemove);
+            return new Coffee(snake,this);
         }
         return new Food(snake);
 
@@ -184,10 +184,7 @@ public class Board extends JPanel {
     }
 
     public void foodRemove() {
-        if (!(food instanceof SpecialFood)) {
-            return;
-        }
-        foodCreator();
+        food = foodCreator();
     }
 
 

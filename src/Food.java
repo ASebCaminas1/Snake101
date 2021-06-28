@@ -7,7 +7,6 @@ public class Food {
     private int row;
     private int col;
     private static final String type = "TOFU";
-    public static final Color brown = new Color(102,51,0);
 
     public Food(Snake snake) {
 

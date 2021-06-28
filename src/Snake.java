@@ -26,9 +26,6 @@ public class Snake {
     //Paint the body
 
     public void paint(Graphics g, int squareWidth, int squareHeight) {
-        //Ancho y alto se calculan con los cuadrados del tablero
-        //Se pinta cada módulo con un for usando las coordenadas de la clase Node
-        //se le llama desde la clase Board.
         for (Node node: body) {
             Util.drawSquare(g, node.getRow(), node.getCol(), Color.ORANGE, squareWidth,squareHeight);
         }
@@ -48,13 +45,6 @@ public class Snake {
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
-
-
-
-    //MOVE METHODS
-    //Método que calcula el siguiente movimiento
-    //Método que calcula si el siguiente movimiento se puede hacer
-    //Método que calcula si puede moverse al nodo dado
 
     public Node calculateNextNode() {
         // It moves the first node of the snake according to the
@@ -94,10 +84,6 @@ public class Snake {
         return canMoveTo(next);
     }
 
-    //métodos asociados al movimiento/crecimiento/decrecimiento
-
-
-
     public void incrementNodesToGrow(int numNodes) {
         nodesToGrow += numNodes;
     }
@@ -105,8 +91,6 @@ public class Snake {
     public void removeLastNode(){
         body.remove(body.size() - 1);
     }
-
-    //Métodos de comprobación de choque
 
 
     public boolean canMoveTo(Node nextNode){
