@@ -30,7 +30,7 @@ public class Snake {
         //Se pinta cada módulo con un for usando las coordenadas de la clase Node
         //se le llama desde la clase Board.
         for (Node node: body) {
-            Util.drawSquare(g, node.getRow(), node.getCol(), Color.ORANGE, squareWidth,squareHeight);
+            Util.drawSquare(g, node.getRow(), node.getCol(), Color.PINK, squareWidth,squareHeight);
         }
     }
 
