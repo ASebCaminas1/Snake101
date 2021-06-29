@@ -22,6 +22,6 @@ public class ScoreBoard extends JPanel implements Incrementer {
     }
 
     public void displayScore(){
-        scoreLabel.setText("Score: " + score);
+        scoreLabel.setText("Player: " + Settings.playerName + " Score: " + score);
     }
 }

@@ -7,6 +7,8 @@ public class SpecialFood extends Food {
     public static final int MAX = 1200;
     public static final int MIN = 3000;
     public static final Color gold = new Color(255,204, 51 );
+    public boolean imAlive = true;
+    public static boolean eated = false;
 
     public SpecialFood(Snake snake, FoodRemover foodRemover) {
         super(snake);
@@ -18,7 +20,9 @@ public class SpecialFood extends Food {
             public void run() {
                 try {
                     Thread.sleep(visible);
+                    if (!eated){
                     foodRemover.foodRemove();
+                    }
                 } catch (InterruptedException e) {
                     System.out.println("Error in SpecialFood thread");
                 }
@@ -30,7 +34,9 @@ public class SpecialFood extends Food {
             Util.drawSquare(g, getRow(), getCol(), gold, width, height);
     }
 
-    public void killThread() {
-        Thread.currentThread().interrupt();
+    public boolean getImAlive(){
+        return imAlive;
     }
+
+
 }

@@ -1,5 +1,5 @@
 public class Settings {
-    public static String playerName;
+    public static String playerName = "";
     private static int deltaTime = 200;
     public static int level = 1;
 

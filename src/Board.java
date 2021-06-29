@@ -15,6 +15,7 @@ public class Board extends JPanel implements FoodRemover{
     public Timer timer;
     private MyKeyAdapter myKey;
     private Incrementer incrementer;
+    private boolean foodEated = false;
     private boolean antiTurner = false;
     private Vortex vortex = new Vortex();
     private boolean teleport = false;
@@ -103,7 +104,6 @@ public class Board extends JPanel implements FoodRemover{
 
     public void lap() {
         if (!snake.collides()) {
-            System.out.println(Thread.currentThread());
             snake.move();
             if (snake.checkTeleport(vortex)){
                 teleporter();
@@ -112,23 +112,23 @@ public class Board extends JPanel implements FoodRemover{
                 if (food instanceof SpecialFood) {
                     snake.incrementNodesToGrow(3);
                     incrementer.incrementScore(100);
-                    ((SpecialFood) food).killThread();
+                    SpecialFood.eated = true;
                 } else {
                     snake.incrementNodesToGrow(1);
                     incrementer.incrementScore(10);
                 }
                 if (food instanceof Coffee) {
                     manageOverdose();
-                    ((Coffee) food).killThread();
+                    Coffee.drinked = true;
                 }
                 food = foodCreator();
             }
-            antiTurner = false;
-            repaint();
 
         } else {
             gameOver();
         }
+        antiTurner = false;
+        repaint();
     }
 
     @Override
