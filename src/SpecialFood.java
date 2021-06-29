@@ -4,8 +4,8 @@ public class SpecialFood extends Food {
 
     private int visible;
     private FoodRemover foodRemover;
-    public static final int MAX = 25000;
-    public static final int MIN = 6000;
+    public static final int MAX = 1200;
+    public static final int MIN = 3000;
     public static final Color gold = new Color(255,204, 51 );
 
     public SpecialFood(Snake snake, FoodRemover foodRemover) {
@@ -28,5 +28,9 @@ public class SpecialFood extends Food {
 
     public void paint(Graphics g, int width, int height) {
             Util.drawSquare(g, getRow(), getCol(), gold, width, height);
+    }
+
+    public void killThread() {
+        Thread.currentThread().interrupt();
     }
 }

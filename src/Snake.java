@@ -79,11 +79,6 @@ public class Snake {
         }
     }
 
-    public boolean canMove() {
-        Node next = calculateNextNode();
-        return canMoveTo(next);
-    }
-
     public void incrementNodesToGrow(int numNodes) {
         nodesToGrow += numNodes;
     }
@@ -104,16 +99,16 @@ public class Snake {
     }
 
 
-    public boolean colides() {
+    public boolean collides() {
         Node next = calculateNextNode();
-        if (!canMoveTo(next) || colidesWithitself(next)) {
+        if (!canMoveTo(next) || collidesWithitself(next)) {
             return true;
         }
         return false;
     }
 
-    public boolean colidesWithitself(Node next) {
-        //Check if the snake colides with is own body
+    public boolean collidesWithitself(Node next) {
+        //Check if the snake collides with is own body
         int row = next.getRow();
         int col = next.getCol();
         for (int i = 0; i < body.size(); i++) {
@@ -134,7 +129,7 @@ public class Snake {
         return false;
     }
 
-    //Food checkers
+    //Food checker
 
     public boolean checkFood(Food food) {
         //Check if the first node of the snake matches the node of the food.
@@ -146,6 +141,7 @@ public class Snake {
         }
     }
 
+    //Teleport checker
 
     public boolean checkTeleport(Vortex vortex) {
         Node first = body.get(0);

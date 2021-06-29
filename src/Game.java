@@ -37,7 +37,6 @@ public class Game extends JFrame {
         setContentPane(mainPanel);
         createMenu();
 
-
         board.initGame();
 
         pack();
@@ -99,14 +98,7 @@ public class Game extends JFrame {
             }
         });
 
-
-
-
-
         menubar.add(Box.createHorizontalGlue());
-
-
-
 
         JMenuItem about = new JMenuItem("About");
         help.add(about);

@@ -1,54 +1,64 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.*;
-//opcional crear menús y ventanas
-public class GameOver extends JPanel {
 
-    public GameOver() {
-            JPanel basic = new JPanel();
-            JLabel area = new JLabel("<<GAME OVER>>");
-            area.setBounds(10,10,10,10);
-            Font font = new Font("Helvetica", Font.BOLD, 11);
-            area.setFont(font);
-            area.setForeground(Color.BLUE);
-            basic.add(area);
+public class GameOver {
 
 
-            basic.setLayout(new BoxLayout(basic, BoxLayout.Y_AXIS));
-            add(basic);
-            basic.add(Box.createVerticalGlue());
-            JPanel bottom = new JPanel();
-            bottom.setAlignmentX(1f);
-            bottom.setLayout(new BoxLayout(bottom,
-                    BoxLayout.X_AXIS));
-            JButton ok = new JButton("Restart");
-            JButton close = new JButton("Close");
-            bottom.add(ok);
-            bottom.add(Box.createRigidArea(new Dimension(5, 0)));
-            bottom.add(close);
-            bottom.add(Box.createRigidArea(new Dimension(15, 0)));
-            basic.add(bottom);
-            basic.add(Box.createRigidArea(new Dimension(0, 15)));
-            //setTitle("Game over");
-            setSize(300, 150);
-            //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            //setLocationRelativeTo(null);
-
-            close.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                            System.exit(0);
-                    }
-            });
-
-            ok.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                            System.exit(0); // Change This!
-                    }
-            });
+    public void paint(Graphics g, int width, int height){
 
 
+        //D
+        Util.drawSquare(g, 12,11, Color.RED, width, height);
+        Util.drawSquare(g, 13,11, Color.RED, width, height);
+        Util.drawSquare(g, 14,11, Color.RED, width, height);
+        Util.drawSquare(g, 15,11, Color.RED, width, height);
+        Util.drawSquare(g, 16,11, Color.RED, width, height);
+        Util.drawSquare(g, 12,12, Color.RED, width, height);
+        Util.drawSquare(g, 16,12, Color.RED, width, height);
+        Util.drawSquare(g, 12,13, Color.RED, width, height);
+        Util.drawSquare(g, 13,13, Color.RED, width, height);
+        Util.drawSquare(g, 14,13, Color.RED, width, height);
+        Util.drawSquare(g, 15,13, Color.RED, width, height);
+        Util.drawSquare(g, 16,13, Color.RED, width, height);
+
+        //E
+        Util.drawSquare(g, 12,15, Color.RED, width, height);
+        Util.drawSquare(g, 13,15, Color.RED, width, height);
+        Util.drawSquare(g, 14,15, Color.RED, width, height);
+        Util.drawSquare(g, 15,15, Color.RED, width, height);
+        Util.drawSquare(g, 16,15, Color.RED, width, height);
+        Util.drawSquare(g, 12,16, Color.RED, width, height);
+        Util.drawSquare(g, 14,16, Color.RED, width, height);
+        Util.drawSquare(g, 16,16, Color.RED, width, height);
+        Util.drawSquare(g, 12,17, Color.RED, width, height);
+        Util.drawSquare(g, 16,17, Color.RED, width, height);
+
+        //A
+        Util.drawSquare(g, 12,19, Color.RED, width, height);
+        Util.drawSquare(g, 13,19, Color.RED, width, height);
+        Util.drawSquare(g, 14,19, Color.RED, width, height);
+        Util.drawSquare(g, 15,19, Color.RED, width, height);
+        Util.drawSquare(g, 16,19, Color.RED, width, height);
+        Util.drawSquare(g, 12,20, Color.RED, width, height);
+        Util.drawSquare(g, 14,20, Color.RED, width, height);
+        Util.drawSquare(g, 12,21, Color.RED, width, height);
+        Util.drawSquare(g, 13,21, Color.RED, width, height);
+        Util.drawSquare(g, 14,21, Color.RED, width, height);
+        Util.drawSquare(g, 15,21, Color.RED, width, height);
+        Util.drawSquare(g, 16,21, Color.RED, width, height);
+
+        //D
+        Util.drawSquare(g, 12,23, Color.RED, width, height);
+        Util.drawSquare(g, 13,23, Color.RED, width, height);
+        Util.drawSquare(g, 14,23, Color.RED, width, height);
+        Util.drawSquare(g, 15,23, Color.RED, width, height);
+        Util.drawSquare(g, 16,23, Color.RED, width, height);
+        Util.drawSquare(g, 12,24, Color.RED, width, height);
+        Util.drawSquare(g, 16,24, Color.RED, width, height);
+        Util.drawSquare(g, 12,25, Color.RED, width, height);
+        Util.drawSquare(g, 13,25, Color.RED, width, height);
+        Util.drawSquare(g, 14,25, Color.RED, width, height);
+        Util.drawSquare(g, 15,25, Color.RED, width, height);
+        Util.drawSquare(g, 16,25, Color.RED, width, height);
     }
+
 }
