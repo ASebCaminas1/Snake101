@@ -24,15 +24,15 @@ public class Vortex {
     }
 
     public void paint(Graphics g, int width, int height){
-        //North
+        //North entrance portal
         Util.drawSquare(g, 34,COL_1, Color.CYAN, width, height);
         Util.drawSquare(g, 35,COL_1, Color.CYAN, width, height);
         Util.drawSquare(g, 36,COL_1, Color.CYAN, width, height);
 
-        //Port
+        //Portal
         Util.drawSquare(g, 18,25, Color.RED, width, height);
 
-        //South
+        //South entrance portal
         Util.drawSquare(g, 4,COL_2, Color.CYAN,  width, height);
         Util.drawSquare(g, 5,COL_2, Color.CYAN,  width, height);
         Util.drawSquare(g, 6,COL_2, Color.CYAN,  width, height);

@@ -4,10 +4,6 @@ import java.util.List;
 
 public class Snake {
 
-    //List of nodes and the direction in wich is moving, also te collider check
-    // Use a canMove() method to anticipate if the snake can move to the next square
-    // To move the snake you have to add a new node at the beginning of the list of nodes
-
     private ArrayList<Node> body;
     private Direction direction;
     private int nodesToGrow;

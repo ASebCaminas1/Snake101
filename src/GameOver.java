@@ -2,11 +2,9 @@ import java.awt.*;
 
 public class GameOver {
 
-
     public void paint(Graphics g, int width, int height){
 
-
-        //D
+        //D It looks like an O but I swear it's a D
         Util.drawSquare(g, 12,11, Color.RED, width, height);
         Util.drawSquare(g, 13,11, Color.RED, width, height);
         Util.drawSquare(g, 14,11, Color.RED, width, height);
@@ -60,5 +58,4 @@ public class GameOver {
         Util.drawSquare(g, 15,25, Color.RED, width, height);
         Util.drawSquare(g, 16,25, Color.RED, width, height);
     }
-
 }

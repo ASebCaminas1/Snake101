@@ -145,8 +145,6 @@ public class Board extends JPanel implements FoodRemover{
             gameOverPainter.paint(g, getSize().width / Board.NUM_COLS, getSize().height / Board.NUM_ROWS);
         }
 
-
-
         drawBlackBorder(g);
         Toolkit.getDefaultToolkit().sync();
     }

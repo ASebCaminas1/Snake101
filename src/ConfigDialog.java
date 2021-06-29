@@ -42,8 +42,5 @@ public class ConfigDialog extends JDialog {
                 dispose();
             }
         });
-
-
-
     }
 }

@@ -27,22 +27,19 @@ public class Game extends JFrame {
 
 
         mainPanel = new JPanel();
-
         mainPanel.setPreferredSize(dimension);
-
         mainPanel.setLayout(new BorderLayout());
 
         mainPanel.add(board, BorderLayout.CENTER);
         mainPanel.add(scoreBoard, BorderLayout.PAGE_END);
         setContentPane(mainPanel);
-        createMenu();
 
+        createMenu();
         board.initGame();
 
         pack();
         setLocationRelativeTo(null);
     }
-
 
     public static void main(String[] args) {
 
