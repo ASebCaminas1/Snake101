@@ -60,34 +60,47 @@ public class Game extends JFrame {
     private void createMenu() {
 
         JMenuBar menubar = new JMenuBar();
-        JMenu startm = new JMenu("Start");
-        JMenu exitm = new JMenu("Exit");
-        JMenu pausem = new JMenu("Pause");
-        JMenu helpm = new JMenu("Help");
+        JMenu game = new JMenu("Game");
+        JMenu settings = new JMenu("Settings");
+        JMenu help = new JMenu("Help");
 
-        menubar.add(startm);
-        startm.addActionListener(new java.awt.event.ActionListener() {
-                                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                         board.timer.stop();
-                                         board.initGame();
-                                     }
-                                 });
-        menubar.add(exitm);
-        exitm.addActionListener(new java.awt.event.ActionListener() {
+        menubar.add(game);
+
+        JMenuItem newGame = new JMenuItem("New game");
+        JMenuItem quit = new JMenuItem("Quit");
+        game.add(newGame);
+        game.add(quit);
+
+        newGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                board.timer.stop();
+                board.initGame();
+            }
+        });
+
+        quit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 System.exit(0);
             }
         });
-        menubar.add(pausem);
-        pausem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (board.timer.isRunning()) {
-                board.timer.stop();
-                } else {
-                    board.timer.start();
-                }
+
+
+        menubar.add(settings);
+        JMenuItem config = new JMenuItem("Config");
+        settings.add(config);
+
+        config.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ConfigDialog configDialog = new ConfigDialog();
+                configDialog.setIconImage(new ImageIcon("res/config.png").getImage());
+                configDialog.setVisible(true);
+                scoreBoard.reset();
             }
         });
+
+
+
 
 
         menubar.add(Box.createHorizontalGlue());
@@ -96,7 +109,7 @@ public class Game extends JFrame {
 
 
         JMenuItem about = new JMenuItem("About");
-        helpm.add(about);
+        help.add(about);
         about.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -106,7 +119,7 @@ public class Game extends JFrame {
         });
 
         JMenuItem tutorial = new JMenuItem("Tutorial");
-        helpm.add(tutorial);
+        help.add(tutorial);
         tutorial.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -116,13 +129,7 @@ public class Game extends JFrame {
             }
         });
 
-        menubar.add(helpm);
-
-
+        menubar.add(help);
         setJMenuBar(menubar);
-
-
-
-
     }
 }

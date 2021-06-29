@@ -13,12 +13,12 @@ public class Snake {
     private int nodesToGrow;
 
     //Constructor
-    public Snake(){
+    public Snake() {
         body = new ArrayList<Node>();
-        body.add(new Node(Board.NUM_ROWS/2,Board.NUM_COLS/2));
-        body.add(new Node(Board.NUM_ROWS/2,Board.NUM_COLS/2 - 1));
-        body.add(new Node(Board.NUM_ROWS/2,Board.NUM_COLS/2 - 2));
-        body.add(new Node(Board.NUM_ROWS/2,Board.NUM_COLS/2 - 3));
+        body.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2));
+        body.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2 - 1));
+        body.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2 - 2));
+        body.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2 - 3));
         direction = Direction.RIGHT;
         nodesToGrow = 0;
     }
@@ -26,12 +26,12 @@ public class Snake {
     //Paint the body
 
     public void paint(Graphics g, int squareWidth, int squareHeight) {
-        for (Node node: body) {
-            Util.drawSquare(g, node.getRow(), node.getCol(), Color.PINK, squareWidth,squareHeight);
+        for (Node node : body) {
+            Util.drawSquare(g, node.getRow(), node.getCol(), Color.PINK, squareWidth, squareHeight);
         }
     }
 
-    public List<Node> getBody(){
+    public List<Node> getBody() {
         return body;
     }
 
@@ -79,7 +79,7 @@ public class Snake {
         }
     }
 
-    public boolean canMove(){
+    public boolean canMove() {
         Node next = calculateNextNode();
         return canMoveTo(next);
     }
@@ -88,12 +88,12 @@ public class Snake {
         nodesToGrow += numNodes;
     }
 
-    public void removeLastNode(){
+    public void removeLastNode() {
         body.remove(body.size() - 1);
     }
 
 
-    public boolean canMoveTo(Node nextNode){
+    public boolean canMoveTo(Node nextNode) {
         if (nextNode.getRow() < 0
                 || nextNode.getRow() >= Board.NUM_ROWS
                 || nextNode.getCol() < 0
@@ -104,7 +104,7 @@ public class Snake {
     }
 
 
-    public boolean colides(){
+    public boolean colides() {
         Node next = calculateNextNode();
         if (!canMoveTo(next) || colidesWithitself(next)) {
             return true;
@@ -126,8 +126,8 @@ public class Snake {
 
     public boolean checkBody(Node node) {
         for (int i = 0; i < body.size(); i++) {
-            if(body.get(i).getRow() == node.getRow() &&
-            body.get(i).getCol() == node.getCol()){
+            if (body.get(i).getRow() == node.getRow() &&
+                    body.get(i).getCol() == node.getCol()) {
                 return true;
             }
         }
@@ -136,7 +136,7 @@ public class Snake {
 
     //Food checkers
 
-    public boolean checkFood(Food food){
+    public boolean checkFood(Food food) {
         //Check if the first node of the snake matches the node of the food.
         Node first = body.get(0);
         if (food.getRow() == first.getRow() && food.getCol() == first.getCol()) {
@@ -157,26 +157,4 @@ public class Snake {
         }
         return false;
     }
-
-
-
-
-
-
-        //|| nextNode.getRow() >= Board.NUM_ROWS
-        //        || nextNode.getCol() < 0
-        //        || nextNode.getCol() >= Board.NUM_COLS){
-
-
-
-
-
-
-
-
-
-
-    //Comprobar que come
-    //GETbody
-    //Contains para food
 }

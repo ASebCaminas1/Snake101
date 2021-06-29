@@ -19,7 +19,6 @@ public class SpecialFood extends Food {
                 try {
                     Thread.sleep(visible);
                     foodRemover.foodRemove();
-
                 } catch (InterruptedException e) {
                     System.out.println("Error in SpecialFood thread");
                 }

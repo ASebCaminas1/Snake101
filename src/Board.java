@@ -11,7 +11,6 @@ public class Board extends JPanel implements FoodRemover{
 
     public static final int NUM_ROWS = 40;
     public static final int NUM_COLS = 50;
-    private int deltaTime = 100;
     private Snake snake;
     private Food food;
     private int caffeine = 0;
@@ -21,6 +20,7 @@ public class Board extends JPanel implements FoodRemover{
     private boolean antiTurner = false;
     private Vortex vortex = new Vortex();
     private boolean teleport = false;
+    private boolean gameOver;
 
     public Board(Incrementer incrementer) {
         this.incrementer = incrementer;
@@ -85,12 +85,12 @@ public class Board extends JPanel implements FoodRemover{
         myKey = new MyKeyAdapter();
         snake = new Snake();
         food = new Food(snake);
-
+        gameOver = false;
         addKeyListener(myKey);
         setFocusable(true);
         requestFocus();
         incrementer.reset();
-        timer = new Timer(getDeltaTime(), new ActionListener() {
+        timer = new Timer(Settings.getDeltaTime(), new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 lap();
@@ -109,15 +109,14 @@ public class Board extends JPanel implements FoodRemover{
             }
             if (snake.checkFood(food)) {
                 if (food instanceof SpecialFood) {
-                        snake.incrementNodesToGrow(3);
-                        incrementer.incrementScore(100);
+                    snake.incrementNodesToGrow(3);
+                    incrementer.incrementScore(100);
                 } else {
                     snake.incrementNodesToGrow(1);
                     incrementer.incrementScore(10);
                 }
                 if (food instanceof Coffee) {
                     manageOverdose();
-
                 }
                 food = foodCreator();
             }
@@ -163,10 +162,6 @@ public class Board extends JPanel implements FoodRemover{
         }
     }
 
-    public int getDeltaTime() {
-        return deltaTime;
-    }
-
     private void drawBlackBorder(Graphics g) {
         g.setColor(Color.WHITE);
         g.drawRect(0, 0, getWidth() / NUM_COLS * NUM_COLS,
@@ -179,7 +174,6 @@ public class Board extends JPanel implements FoodRemover{
         for (int i = 0; i <= 2; i++) {
             snake.getBody().add(0, node);
             snake.removeLastNode();
-            repaint();
         }
     }
 
@@ -193,14 +187,11 @@ public class Board extends JPanel implements FoodRemover{
             return new Coffee(snake,this);
         }
         return new Food(snake);
-
-
     }
 
     public void foodRemove() {
         food = foodCreator();
     }
-
 
     private void gameOver(){
         System.out.println("GAME OVER");
@@ -208,8 +199,6 @@ public class Board extends JPanel implements FoodRemover{
     }
 
     //Teleport methods zone
-
-    //Setter and getter for teleport activation
 
     public void setTeleport(boolean teleport) {
         this.teleport = teleport;
