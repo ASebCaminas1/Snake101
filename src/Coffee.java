@@ -2,7 +2,7 @@ import java.awt.*;
 
 public class Coffee extends Food {
 
-    private int visible = 15000;
+    private int visible = 30000;
     private FoodRemover foodRemover;
     private static final String type = "COFFEE";
     public static final Color brown = new Color(102, 51, 0);
@@ -17,7 +17,6 @@ public class Coffee extends Food {
                 try {
                     Thread.sleep(visible);
                     foodRemover.foodRemove();
-                    System.out.println("ICE COFFEE");
                 } catch (InterruptedException e) {
                     System.out.println("Error in Coffee thread");
                 }

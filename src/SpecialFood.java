@@ -6,9 +6,8 @@ public class SpecialFood extends Food {
     private FoodRemover foodRemover;
     private Boolean rot = false;
     private static final String type = "BANANA";
-    public static final int MAX = 13000;
-    public static final int MIN = 3000;
-    public static final int timeRot = 9000;
+    public static final int MAX = 25000;
+    public static final int MIN = 6000;
     public static final Color gold = new Color(255,204, 51 );
     public static final Color rotted = new Color(153,102, 0);
 
@@ -21,10 +20,6 @@ public class SpecialFood extends Food {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(visible);
-                    rot = true;
-                    System.out.println("The banana has rotten");
-                    visible = timeRot;
                     Thread.sleep(visible);
                     foodRemover.foodRemove();
 

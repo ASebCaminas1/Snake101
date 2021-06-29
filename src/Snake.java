@@ -147,16 +147,18 @@ public class Snake {
     }
 
 
-    public void teleportSnake(Node nextNode) {
-        body = new ArrayList<Node>();
-        if (nextNode.getCol() < 0) {
-        for (int i = 0; i < body.size(); i++) {
-                removeLastNode();
-                body.add(new Node(Board.NUM_ROWS/2,49));
-                setDirection(getDirection());
+    public boolean checkTeleport(Vortex vortex) {
+        Node first = body.get(0);
+        for (int i = 0; i < 6; i++) {
+            if (vortex.getNode(i).getRow() == first.getRow() && vortex.getNode(i).getCol() == first.getCol()) {
+                System.out.println("vortex");
+                return true;
             }
         }
+        return false;
     }
+
+
 
 
 

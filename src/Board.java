@@ -14,14 +14,13 @@ public class Board extends JPanel implements FoodRemover{
     private int deltaTime = 600;
     private Snake snake;
     private Food food;
-    private SpecialFood specialFood;
     private int caffeine = 0;
     public Timer timer;
     private MyKeyAdapter myKey;
     private Incrementer incrementer;
     private boolean antiTurner = false;
-    private Coffee coffee;
-    //private BufferedImage background;
+    private Vortex vortex = new Vortex();
+    private boolean teleport = false;
 
     public Board(Incrementer incrementer) {
         this.incrementer = incrementer;
@@ -102,6 +101,10 @@ public class Board extends JPanel implements FoodRemover{
     public void lap() {
         if (!snake.colides()) {
             snake.move();
+            System.out.println("Caffeine:" + caffeine);
+            if (snake.checkTeleport(vortex)){
+                teleporter();
+            }
             if (snake.checkFood(food)) {
                 if (food instanceof SpecialFood) {
                         snake.incrementNodesToGrow(3);
@@ -111,14 +114,15 @@ public class Board extends JPanel implements FoodRemover{
                     incrementer.incrementScore(10);
                     System.out.println(food.getType());
                 }
-                if (food.getType().equals("COFFEE")) {
-                    setDeltaTime(100);
-                    System.out.println(food.getType());
+                if (food instanceof Coffee) {
+                    manageOverdose();
+
                 }
                 food = foodCreator();
             }
             antiTurner = false;
             repaint();
+
         } else {
             gameOver();
         }
@@ -136,17 +140,27 @@ public class Board extends JPanel implements FoodRemover{
                 getSize().height / Board.NUM_ROWS);
         food.paint(g, getSize().width / Board.NUM_COLS, getSize().height / Board.NUM_ROWS);
 
+        if (teleport) {
+            vortex.paint(g, getSize().width / Board.NUM_COLS, getSize().height / Board.NUM_ROWS);
+        }
+
+
         drawBlackBorder(g);
         Toolkit.getDefaultToolkit().sync();
     }
 
-    public void setDeltaTime(int x) {
-        //Caffeine controls that the coffee type modifies the delta time up to a maximum of three times.
-        if (caffeine < 3) {
-            deltaTime = getDeltaTime() - x;
-        } else {
-            deltaTime = 600;
+    public void manageOverdose() {
+        //Caffeine controls the vortex.
+        if (caffeine > 5) {
+            System.out.println("Caffeine OVERDOSE!!");
             caffeine = 0;
+        } else {
+            if (caffeine < 3) {
+                caffeine++;
+            } else {
+                manageVortex();
+                caffeine++;
+            }
         }
     }
 
@@ -166,6 +180,7 @@ public class Board extends JPanel implements FoodRemover{
         for (int i = 0; i <= 2; i++) {
             snake.getBody().add(0, node);
             snake.removeLastNode();
+            repaint();
         }
     }
 
@@ -193,6 +208,35 @@ public class Board extends JPanel implements FoodRemover{
         timer.stop();
     }
 
+    //Teleport methods zone
+
+    //Setter and getter for teleport activation
+
+    public boolean getTeleport() {
+        return teleport;
+    }
+
+    public void setTeleport(boolean teleport) {
+        this.teleport = teleport;
+    }
 
 
+    public void manageVortex() {
+        if (!getTeleport()) {
+            setTeleport(true);
+        } else {
+            setTeleport(false);
+        }
+    }
+
+    public void teleporter(){
+        if (teleport) {
+            for (int i = 0; i < snake.getBody().size(); i++) {
+                Node node = new Node(18,25);
+                snake.getBody().remove(0);
+                snake.getBody().add(0, node);
+            }
+        }
+
+    }
 }
