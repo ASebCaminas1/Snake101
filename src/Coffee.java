@@ -4,7 +4,6 @@ public class Coffee extends Food {
 
     private int visible = 30000;
     private FoodRemover foodRemover;
-    private static final String type = "COFFEE";
     public static final Color brown = new Color(102, 51, 0);
 
     public Coffee(Snake snake, FoodRemover foodRemover) {
@@ -26,8 +25,5 @@ public class Coffee extends Food {
 
     public void paint(Graphics g, int width, int height) {
             Util.drawSquare(g, getRow(), getCol(), brown, width, height);
-    }
-    public String getType(){
-        return type;
     }
 }

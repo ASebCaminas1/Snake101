@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Game extends JFrame {
 
@@ -91,9 +93,36 @@ public class Game extends JFrame {
         menubar.add(Box.createHorizontalGlue());
 
 
+
+
+        JMenuItem about = new JMenuItem("About");
+        helpm.add(about);
+        about.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AboutDialog ad = new AboutDialog();
+                ad.setVisible(true);
+            }
+        });
+
+        JMenuItem tutorial = new JMenuItem("Tutorial");
+        helpm.add(tutorial);
+        tutorial.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Tutorial tut = new Tutorial();
+                tut.setVisible(true);
+
+            }
+        });
+
         menubar.add(helpm);
 
 
         setJMenuBar(menubar);
+
+
+
+
     }
 }

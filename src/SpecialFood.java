@@ -4,12 +4,9 @@ public class SpecialFood extends Food {
 
     private int visible;
     private FoodRemover foodRemover;
-    private Boolean rot = false;
-    private static final String type = "BANANA";
     public static final int MAX = 25000;
     public static final int MIN = 6000;
     public static final Color gold = new Color(255,204, 51 );
-    public static final Color rotted = new Color(153,102, 0);
 
     public SpecialFood(Snake snake, FoodRemover foodRemover) {
         super(snake);
@@ -31,15 +28,6 @@ public class SpecialFood extends Food {
     }
 
     public void paint(Graphics g, int width, int height) {
-        if (!rot) {
             Util.drawSquare(g, getRow(), getCol(), gold, width, height);
-        } else {
-            Util.drawSquare(g, getRow(), getCol(), rotted, width, height);
-        }
     }
-
-    public String getType(){
-        return type;
-    }
-
 }

@@ -11,7 +11,7 @@ public class Board extends JPanel implements FoodRemover{
 
     public static final int NUM_ROWS = 40;
     public static final int NUM_COLS = 50;
-    private int deltaTime = 600;
+    private int deltaTime = 100;
     private Snake snake;
     private Food food;
     private int caffeine = 0;
@@ -58,7 +58,9 @@ public class Board extends JPanel implements FoodRemover{
                     }
                     break;
                 case KeyEvent.VK_SPACE:
+                    if(timer.isRunning()) {
                     jump();
+                    }
                     break;
                 case KeyEvent.VK_P:
                     if (timer.isRunning()) {
@@ -112,7 +114,6 @@ public class Board extends JPanel implements FoodRemover{
                 } else {
                     snake.incrementNodesToGrow(1);
                     incrementer.incrementScore(10);
-                    System.out.println(food.getType());
                 }
                 if (food instanceof Coffee) {
                     manageOverdose();
@@ -151,16 +152,14 @@ public class Board extends JPanel implements FoodRemover{
 
     public void manageOverdose() {
         //Caffeine controls the vortex.
-        if (caffeine > 5) {
-            System.out.println("Caffeine OVERDOSE!!");
+        caffeine++;
+        if (caffeine > 3 && caffeine < 6) {
+            caffeine++;
+            setTeleport(true);
+        }
+        if (caffeine == 6) {
             caffeine = 0;
-        } else {
-            if (caffeine < 3) {
-                caffeine++;
-            } else {
-                manageVortex();
-                caffeine++;
-            }
+            setTeleport(false);
         }
     }
 
@@ -212,21 +211,8 @@ public class Board extends JPanel implements FoodRemover{
 
     //Setter and getter for teleport activation
 
-    public boolean getTeleport() {
-        return teleport;
-    }
-
     public void setTeleport(boolean teleport) {
         this.teleport = teleport;
-    }
-
-
-    public void manageVortex() {
-        if (!getTeleport()) {
-            setTeleport(true);
-        } else {
-            setTeleport(false);
-        }
     }
 
     public void teleporter(){

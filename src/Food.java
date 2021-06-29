@@ -3,11 +3,8 @@ import java.util.Random;
 
 public class Food {
 
-
     private int row;
     private int col;
-    private static final String type = "TOFU";
-
 
     public Food(Snake snake) {
 
@@ -33,9 +30,6 @@ public class Food {
 
     public int getCol() {
         return col;
-    }
-    public String getType(){
-        return type;
     }
 
 }
