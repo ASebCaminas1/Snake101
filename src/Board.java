@@ -20,7 +20,13 @@ public class Board extends JPanel implements FoodRemover{
     private boolean antiTurner = false;
     private boolean antiTurner2 = false;
     private Vortex vortex = new Vortex();
-    private boolean teleport = true;
+    private boolean teleport = false;
+
+    public boolean isAntiWalls() {
+        return antiWalls;
+    }
+
+    public boolean antiWalls = false;
     private boolean gameOver;
     private GameOver gameOverPainter;
 
@@ -151,14 +157,15 @@ public class Board extends JPanel implements FoodRemover{
             if (snake.checkFood(food)) {
                 if (food instanceof SpecialFood) {
                     snake.incrementNodesToGrow(3);
-                    incrementer.incrementScore(100);
+                    incrementer.incrementScore(100, snake.getId());
                     SpecialFood.eated = true;
                 } else {
                     snake.incrementNodesToGrow(1);
-                    incrementer.incrementScore(10);
+                    incrementer.incrementScore(10, snake.getId());
                 }
                 if (food instanceof Coffee) {
                     manageOverdose();
+                    incrementer.incrementScore(5, snake.getId());
                     Coffee.drinked = true;
                 }
                 food = foodCreator();
@@ -278,4 +285,27 @@ public class Board extends JPanel implements FoodRemover{
             }
         }
     }
+
+
+    public void teleporter2(){
+        if (teleport) {
+            if (snake1.checkTeleport(vortex)) {
+                for (int i = 0; i < snake1.getBody().size(); i++) {
+                    Node node = new Node(18,25);
+                    snake1.getBody().remove(0);
+                    snake1.getBody().add(0, node);
+                    snake1.setDirection(Direction.DOWN);
+                }
+            }
+            if (snake2.checkTeleport(vortex)) {
+                for (int i = 0; i < snake2.getBody().size(); i++) {
+                    Node node = new Node(18,25);
+                    snake2.getBody().remove(0);
+                    snake2.getBody().add(0, node);
+                    snake2.setDirection(Direction.UP);
+                }
+            }
+        }
+    }
+
 }

@@ -18,13 +18,12 @@ public class ScoreBoard extends JPanel implements Incrementer {
         displayScore();
     }
 
-    public void incrementScore(int increment) {
-        score += increment;
-        displayScore();
-    }
-
-    public void incrementScore2(int increment) {
-        score2 += increment;
+    public void incrementScore(int increment, int player) {
+        if (player == 1) {
+            score += increment;
+        } else {
+            score2 += increment;
+        }
         displayScore();
     }
 
