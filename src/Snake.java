@@ -7,23 +7,42 @@ public class Snake {
     private ArrayList<Node> body;
     private Direction direction;
     private int nodesToGrow;
+    private Color color;
+    private int id;
 
     //Constructor
-    public Snake() {
-        body = new ArrayList<Node>();
-        body.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2));
-        body.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2 - 1));
-        body.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2 - 2));
-        body.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2 - 3));
+    public Snake(int num) {
+        this.id = num;
+        if (num == 1) {
+            color = Color.PINK;
+            body = new ArrayList<Node>();
+            body.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2));
+            body.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2 - 1));
+            body.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2 - 2));
+            body.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2 - 3));
+
+        } else {
+            color = Color.GREEN;
+            body = new ArrayList<Node>();
+            body.add(new Node(Board.NUM_ROWS / 2 + 2, Board.NUM_COLS / 2 ));
+            body.add(new Node(Board.NUM_ROWS / 2 + 2, Board.NUM_COLS / 2 - 1));
+            body.add(new Node(Board.NUM_ROWS / 2 + 2, Board.NUM_COLS / 2 - 2));
+            body.add(new Node(Board.NUM_ROWS / 2 + 2, Board.NUM_COLS / 2 - 3));
+
+        }
         direction = Direction.RIGHT;
         nodesToGrow = 0;
+    }
+
+    public int getId() {
+        return id;
     }
 
     //Paint the body
 
     public void paint(Graphics g, int squareWidth, int squareHeight) {
         for (Node node : body) {
-            Util.drawSquare(g, node.getRow(), node.getCol(), Color.PINK, squareWidth, squareHeight);
+            Util.drawSquare(g, node.getRow(), node.getCol(), color, squareWidth, squareHeight);
         }
     }
 
@@ -95,9 +114,9 @@ public class Snake {
     }
 
 
-    public boolean collides() {
+    public boolean collides(Snake snake) {
         Node next = calculateNextNode();
-        if (!canMoveTo(next) || collidesWithitself(next)) {
+        if (!canMoveTo(next) || collidesWithitself(next) || snake.checkBody(next)) {
             return true;
         }
         return false;
@@ -143,7 +162,6 @@ public class Snake {
         Node first = body.get(0);
         for (int i = 0; i < 6; i++) {
             if (vortex.getNode(i).getRow() == first.getRow() && vortex.getNode(i).getCol() == first.getCol()) {
-                System.out.println("vortex");
                 return true;
             }
         }

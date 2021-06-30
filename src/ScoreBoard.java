@@ -2,6 +2,7 @@ import javax.swing.*;
 
 public class ScoreBoard extends JPanel implements Incrementer {
     private int score;
+    private int score2;
     private JLabel scoreLabel;
 
     public ScoreBoard() {
@@ -13,6 +14,7 @@ public class ScoreBoard extends JPanel implements Incrementer {
 
     public void reset(){
         score = 0;
+        score2 = 0;
         displayScore();
     }
 
@@ -21,7 +23,13 @@ public class ScoreBoard extends JPanel implements Incrementer {
         displayScore();
     }
 
+    public void incrementScore2(int increment) {
+        score2 += increment;
+        displayScore();
+    }
+
     public void displayScore(){
-        scoreLabel.setText("Player: " + Settings.playerName + " Score: " + score);
+        scoreLabel.setText("Player 1: " + Settings.playerName + " Score: " + score + "\n Player 2: "+
+        Settings.playerName2 + " Score: " + score2);
     }
 }

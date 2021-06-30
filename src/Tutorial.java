@@ -23,10 +23,12 @@ public class Tutorial extends JDialog{
         add(Box.createRigidArea(new Dimension(30,10)));
 
         JTextArea text = new JTextArea();
-        text.setText("Move the snake avoiding the walls.\n There are three types of food:\n" +
+        text.setText(" Move the snake avoiding the walls.\n  There are three types of food:\n" +
                 " - Tofu, which makes a node grow.\n - Banana, which grows three nodes.\n " +
                 "- Coffee, that allows you to open teleportation portals \n" +
-                "when the snake suffers a caffeine overdose (4 coffees).");
+                " when the snake suffers a caffeine overdose (4 coffees).\n" +
+                "- Movement player 1: Arrows\n" +
+                "- Movement player 2: A,S,W,D");
         text.setFont(new Font("Helvetica", Font.BOLD, 12));
         add(text);
 
