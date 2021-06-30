@@ -140,13 +140,13 @@ public class Board extends JPanel implements FoodRemover{
         if (snake == snake1) {
             theOther = snake2;
         } else {
-            theOther = snake;
+            theOther = snake1;
         }
 
         if (!snake.collides(theOther)) {
             snake.move();
             if (snake.checkTeleport(vortex)){
-                teleporter(snake);
+                teleporter();
             }
             if (snake.checkFood(food)) {
                 if (food instanceof SpecialFood) {
@@ -258,15 +258,22 @@ public class Board extends JPanel implements FoodRemover{
         this.teleport = teleport;
     }
 
-    public void teleporter(Snake snake){
+    public void teleporter(){
         if (teleport) {
-            for (int i = 0; i < snake.getBody().size(); i++) {
+            if (snake1.checkTeleport(vortex)) {
+            for (int i = 0; i < snake1.getBody().size(); i++) {
                 Node node = new Node(18,25);
-                snake.getBody().remove(0);
-                snake.getBody().add(0, node);
-                if (snake1.checkTeleport(vortex) && snake2.checkTeleport(vortex)) {
+                snake1.getBody().remove(0);
+                snake1.getBody().add(0, node);
+                snake1.setDirection(Direction.DOWN);
+                }
+            }
+            if (snake2.checkTeleport(vortex)) {
+                for (int i = 0; i < snake2.getBody().size(); i++) {
+                    Node node = new Node(18,25);
+                    snake2.getBody().remove(0);
+                    snake2.getBody().add(0, node);
                     snake2.setDirection(Direction.UP);
-                    snake1.setDirection(Direction.DOWN);
                 }
             }
         }
