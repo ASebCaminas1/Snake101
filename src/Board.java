@@ -21,12 +21,6 @@ public class Board extends JPanel implements FoodRemover{
     private boolean antiTurner2 = false;
     private Vortex vortex = new Vortex();
     private boolean teleport = false;
-
-    public boolean isAntiWalls() {
-        return antiWalls;
-    }
-
-    public boolean antiWalls = false;
     private boolean gameOver;
     private GameOver gameOverPainter;
 
@@ -285,27 +279,4 @@ public class Board extends JPanel implements FoodRemover{
             }
         }
     }
-
-
-    public void teleporter2(){
-        if (teleport) {
-            if (snake1.checkTeleport(vortex)) {
-                for (int i = 0; i < snake1.getBody().size(); i++) {
-                    Node node = new Node(18,25);
-                    snake1.getBody().remove(0);
-                    snake1.getBody().add(0, node);
-                    snake1.setDirection(Direction.DOWN);
-                }
-            }
-            if (snake2.checkTeleport(vortex)) {
-                for (int i = 0; i < snake2.getBody().size(); i++) {
-                    Node node = new Node(18,25);
-                    snake2.getBody().remove(0);
-                    snake2.getBody().add(0, node);
-                    snake2.setDirection(Direction.UP);
-                }
-            }
-        }
-    }
-
 }

@@ -122,14 +122,6 @@ public class Snake {
         return false;
     }
 
-    public boolean collidesWalls() {
-        Node next = calculateNextNode();
-        if (!canMoveTo(next)) {
-            return true;
-        }
-        return false;
-    }
-
     public boolean collidesWithitself(Node next) {
         //Check if the snake collides with is own body
         int row = next.getRow();
