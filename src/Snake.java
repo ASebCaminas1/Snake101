@@ -143,7 +143,6 @@ public class Snake {
         Node first = body.get(0);
         for (int i = 0; i < 6; i++) {
             if (vortex.getNode(i).getRow() == first.getRow() && vortex.getNode(i).getCol() == first.getCol()) {
-                System.out.println("vortex");
                 return true;
             }
         }
