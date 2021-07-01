@@ -83,7 +83,12 @@ public class Board extends JPanel implements FoodRemover{
                     break;
                 case KeyEvent.VK_SPACE:
                     if(timer.isRunning()) {
-                    //jump();
+                      jump(snake1);
+                    }
+                    break;
+                case KeyEvent.VK_J:
+                    if(timer.isRunning()) {
+                        jump(snake2);
                     }
                     break;
                 case KeyEvent.VK_P:
@@ -212,14 +217,13 @@ public class Board extends JPanel implements FoodRemover{
                 getHeight() / NUM_ROWS * NUM_ROWS);
     }
 
-    /*public void jump() {
-        //Pressing space moves the snake forward two nodes.
-        Node node = new Node(snake.calculateNextNode().getRow(), snake.calculateNextNode().getCol());
+    public void jump(Snake snake) {
         for (int i = 0; i <= 2; i++) {
+            Node node = new Node(snake.calculateNextNode().getRow(), snake.calculateNextNode().getCol());
             snake.getBody().add(0, node);
             snake.removeLastNode();
         }
-    }*/
+    }
 
     public Food foodCreator() {
         //Select randomly between normal and special food.
